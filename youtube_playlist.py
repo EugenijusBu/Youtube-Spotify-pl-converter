@@ -35,15 +35,13 @@ def yt():
         maxResults=50
     )
 
-#nesuprantu
-#--------------------
     playlist_items = []
     while request is not None:
         response = request.execute()
         playlist_items += response["items"]
         request = youtube.playlistItems().list_next(request, response)
 
-#--------------------
+
 
 
 
@@ -53,7 +51,6 @@ def yt():
 
 
     print(f"total: {len(playlist_items)}")
-    # print(playlist_item_ids)
 
     for item_id in playlist_item_ids:
         youtube_url = "https://www.youtube.com/watch?v={}".format(item_id)
@@ -73,7 +70,6 @@ def yt():
         except (youtube_dl.utils.ExtractorError, youtube_dl.utils.DownloadError) as e:
             pass
 
-    # print(spotify_uris)
     add_song(uri_list=spotify_uris, playlistid=idd)
     print("All available songs were added successfully, in 60 seconds I will check for any changes! :)")
     s.enter(60, 1, do_something, (s,))
@@ -134,7 +130,6 @@ def do_something(sc):
                 pass
         add_song(uri_list=spotify_uris, playlistid=idd)
         print("Playlist updated, enjoy your music, 60 seconds until i check again owo")
-    # do your stuff
     s.enter(60, 1, do_something, (sc,))
 
 
