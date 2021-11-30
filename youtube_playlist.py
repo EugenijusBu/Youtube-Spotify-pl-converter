@@ -70,8 +70,10 @@ def yt():
         except (youtube_dl.utils.ExtractorError, youtube_dl.utils.DownloadError) as e:
             pass
 
-    add_song(uri_list=spotify_uris, playlistid=idd)
+    add_song(uri_list = spotify_uris, playlistid = idd)
     print("All available songs were added successfully, in 60 seconds I will check for any changes! :)")
+    # print(spotify_uris)
+    # do_something(s)
     s.enter(60, 1, do_something, (s,))
     s.run()
 
@@ -97,12 +99,15 @@ def do_something(sc):
 
     if check_playlist == playlist_item_ids:
         print("No changes made, i will check again in 60 seconds! :)")
+        # print(idd)
+        # print(spotify_uris)
+        # print(len(spotify_uris))
     else:
         print("Oh no changes made to playlist, i will modify it!")
         clear_playlist(idd, spotify_uris)
-        print(idd)
-        print(spotify_uris)
-        print(len(spotify_uris))
+        # print(idd)
+        # print(spotify_uris)
+        # print(len(spotify_uris))
         time.sleep(10)
         playlist_item_ids.clear()
 

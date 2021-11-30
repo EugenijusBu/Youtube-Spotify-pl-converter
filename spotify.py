@@ -55,11 +55,15 @@ def add_song(*, playlistid=playlist_id, uri_list):
 
         test = len(uri_list) // 100
         helper_list = []
-        uri_list.reverse()
+
+        new_help_list = []
+
+        new_help_list = uri_list.copy()
+        new_help_list.reverse()
         for x in range(test + 1):
             i = 0
-            while len(uri_list) > 0 and i != 100:
-                item_to_add = uri_list.pop()
+            while len(new_help_list) > 0 and i != 100:
+                item_to_add = new_help_list.pop()
                 helper_list.append(item_to_add)
 
                 i += 1
@@ -104,7 +108,7 @@ def clear_playlist(playlist_id, uri_list):
 
     else:
         print("I else code")
-        test_list = uri_list
+        test_list = uri_list.copy()
         print(test_list)
         test = len(test_list) // 100
         print(test)
@@ -122,8 +126,6 @@ def clear_playlist(playlist_id, uri_list):
             for item in helper_list:
                 oneentry = {"uri": item}
                 naujas_helper.append(oneentry)
-
-            print(naujas)
 
             SPOTIFY_CLEAR_PLAYLIST = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
             response = rq.delete(SPOTIFY_CLEAR_PLAYLIST,
